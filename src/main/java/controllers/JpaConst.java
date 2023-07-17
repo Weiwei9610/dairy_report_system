@@ -1,6 +1,6 @@
 package controllers;
 
-public interface jpaConst {
+public interface JpaConst {
 
     String PERSISTENCE_UNIT_NAME = "daily_report_system";
 
