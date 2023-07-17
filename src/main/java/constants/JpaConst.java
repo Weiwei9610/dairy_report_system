@@ -1,4 +1,4 @@
-package controllers;
+package constants;
 
 public interface JpaConst {
 
@@ -21,9 +21,10 @@ public interface JpaConst {
     int ROLE_GENERAL = 0;
     int EMP_DEL_TRUE = 1;
     int EMP_DEL_FALSE = 0;
-    String TABLE_REP = "reports";
 
-    String REP_COL_ID = "id";
+    String TABLE_REP = "reports"; //テーブル名
+    //日報テーブルカラム
+    String REP_COL_ID = "id"; //id
     String REP_COL_EMP = "employee_id"; //日報を作成した従業員のid
     String REP_COL_REP_DATE = "report_date"; //いつの日報かを示す日付
     String REP_COL_TITLE = "title"; //日報のタイトル
