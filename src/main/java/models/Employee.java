@@ -37,6 +37,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = JpaConst.EMP_COL_CODE, nullable = false, unique = true)
+    private String code;
+
     @Column(name = JpaConst.EMP_COL_NAME, nullable = false)
     private String name;
 
