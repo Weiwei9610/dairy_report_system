@@ -48,10 +48,12 @@ public abstract class ActionBase {
             //ommandに該当するメソッドを実行する
             //(例: action=Employee command=show の場合 EmployeeActionクラスのshow()メソッドを実行する)
             commandMethod = this.getClass().getDeclaredMethod(command, new Class[0]);
+            System.out.println("メソッド取得");
             commandMethod.invoke(this, new Object[0]); //メソッドに渡す引数はなし
 
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NullPointerException e) {
+            System.out.println("エラー発生 " + e);
 
             //発生した例外をコンソールに表示
             e.printStackTrace();
