@@ -55,6 +55,19 @@ public class EmployeeAction extends ActionBase {
         forward(ForwardConst.FW_EMP_INDEX);
     }
 
+    public void show() throws ServletException, IOException {
+        EmployeeView ev = service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+        if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
+
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+            return;
+        }
+
+        putRequestScope(AttributeConst.EMPLOYEE, ev);
+
+        forward(ForwardConst.FW_EMP_SHOW);
+    }
+
     public void create() throws ServletException, IOException {
         if (checkToken()) {
 
