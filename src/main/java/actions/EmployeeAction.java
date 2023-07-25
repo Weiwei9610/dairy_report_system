@@ -130,6 +130,21 @@ public class EmployeeAction extends ActionBase {
         }
     }
 
+    @SuppressWarnings("unused")
+    private boolean checkAdmin() throws ServletException, IOException {
+
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+        if (ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
+
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+            return false;
+
+        } else {
+            return true;
+        }
+    }
+
     public void create() throws ServletException, IOException {
         if (checkToken()) {
 
