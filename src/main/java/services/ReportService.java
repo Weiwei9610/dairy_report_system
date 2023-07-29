@@ -25,7 +25,7 @@ public class ReportService extends ServiceBase {
 
     public long countAllMine(EmployeeView employee) {
 
-        long count = (long) em.createNamedQuery(JpaConst.Q_REP_GET_ALL_MINE, Long.class)
+        long count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT_ALL_MINE, Long.class)
                 .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
                 .getSingleResult();
 
@@ -42,7 +42,7 @@ public class ReportService extends ServiceBase {
     }
 
     public long countAll() {
-        long reports_count = (long) em.createNamedQuery(JpaConst.Q_EMP_COUNT, Long.class)
+        long reports_count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT, Long.class)
                 .getSingleResult();
         return reports_count;
     }
@@ -72,7 +72,7 @@ public class ReportService extends ServiceBase {
             LocalDateTime ldt = LocalDateTime.now();
             rv.setUpdatedAt(ldt);
 
-            updatedInternal(rv);
+            updateInternal(rv);
         }
 
         return errors;
@@ -87,14 +87,16 @@ public class ReportService extends ServiceBase {
         em.getTransaction().begin();
         em.persist(ReportConverter.toModel(rv));
         em.getTransaction().commit();
+
     }
 
-    private void updatedInternal(ReportView rv) {
+    private void updateInternal(ReportView rv) {
 
         em.getTransaction().begin();
         Report r = findOneInternal(rv.getId());
         ReportConverter.copyViewToModel(r, rv);
         em.getTransaction().commit();
+
     }
 
 }
