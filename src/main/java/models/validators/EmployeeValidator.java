@@ -7,6 +7,10 @@ import actions.views.EmployeeView;
 import constants.MessageConst;
 import services.EmployeeService;
 
+/**
+ * 従業員インスタンスに設定されている値のバリデーションを行うクラス
+ *
+ */
 public class EmployeeValidator {
 
     public static List<String> validate(
@@ -32,16 +36,23 @@ public class EmployeeValidator {
     }
 
     private static String validateCode(EmployeeService service, String code, Boolean codeDuplicateCheckFlag) {
-        if (code == null || code.equals(""))
 
-        {
+        if (code == null || code.equals("")) {
             return MessageConst.E_NOEMP_CODE.getMessage();
         }
-        return "";
 
+        if (codeDuplicateCheckFlag) {
+
+            long employeesCount = isDuplicateEmployee(service, code);
+
+            if (employeesCount > 0) {
+                return MessageConst.E_EMP_CODE_EXIST.getMessage();
+            }
+        }
+
+        return "";
     }
 
-    @SuppressWarnings("unused")
     private static long isDuplicateEmployee(EmployeeService service, String code) {
 
         long employeesCount = service.countByCode(code);
