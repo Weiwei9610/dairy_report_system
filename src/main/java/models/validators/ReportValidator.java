@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import actions.views.ReportView;
-import constants.MessageConst;
 
 public class ReportValidator {
 
@@ -25,14 +24,14 @@ public class ReportValidator {
 
     private static String validateTitle(String title) {
         if (title == null || title.equals("")) {
-            return MessageConst.E_NOTITLE.getMessage();
+            return "タイトルを入力してください。";
         }
         return "";
     }
 
     private static String validateContent(String content) {
         if (content == null || content.equals("")) {
-            return MessageConst.E_NOCONTENT.getMessage();
+            return "メッセージを入力してください。";
         }
 
         return "";
